@@ -17,7 +17,7 @@ switch_pw = "__PASS__"
 try:
     for dev in devices:
      child = pexpect.spawn('telnet', [dev.strip()])
-     ''' If you want create file for every device,
+     ''' If you want create a file for every device,
      exclude the '##' of lines 24-25 and put the '#' at
      lines 26 to 28
      '''
