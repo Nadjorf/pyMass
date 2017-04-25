@@ -1,5 +1,6 @@
 import sys
 import pexpect
+import base64
 
 devFile = open('devices', 'r')
 devices = [i for i in devFile]
@@ -12,7 +13,7 @@ abc.x.com
 '''
 
 switch_un = "__USER__"
-switch_pw = "__PASS__"
+# switch_pw = "__PASS__"
 
 try:
     for dev in devices:
@@ -37,7 +38,7 @@ try:
        child.logfile = sys.stdout
        child.expect('Password:')
        child.logfile = None
-       child.sendline(switch_pw)
+       child.sendline(base64.b64decode("TTXXXXXXXDA="))
        child.logfile = sys.stdout
        i = child.expect (['>', '#', pexpect.EOF, pexpect.TIMEOUT])
        if i==0:
@@ -66,10 +67,10 @@ try:
          print " [-] Cisco device ...\n"
          child.kill(0)
        elif i == 2:
-         print "Error EOF ..."
+         print " [-] Error EOF ...\n"
          child.kill(0)
        elif i == 3:
-         print " [*] Timeout ...\n"
+         print " [-] Timeout ...\n"
          child.kill(0)
      else:
       ## Any problem? move on
